@@ -12,7 +12,7 @@ const errorHandler = (err) => {
 db.run(`DROP TABLE IF EXISTS employees`);
 
 const createEmployeesTable = () => {
-	db.run("CREATE TABLE IF NOT EXISTS employees (id INT, firstName TEXT, lastName TEXT, jobTitle TEXT, address TEXT)");
+	db.run("CREATE TABLE IF NOT EXISTS employees (id INT, firstName TEXT, lastName TEXT, jobTitle TEXT, address TEXT, salary INT)");
 }
 createEmployeesTable();
 
@@ -22,7 +22,8 @@ list.forEach( (employee) => {
     "${employee.firstName}",
     "${employee.lastName}",
     "${employee.jobTitle}",
-    "${employee.address}")`
+    "${employee.address}",
+    ${employee.salary})`
   )
 });
 
