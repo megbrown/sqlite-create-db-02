@@ -34,3 +34,10 @@ list.forEach( (employee) => {
   )
 });
 
+db.each('SELECT * FROM employees', (err, allRows) => {
+  console.log('record', allRows);
+  if (err) {
+    return console.log('err', err.toString());
+ 	}
+});
+
