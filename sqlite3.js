@@ -49,3 +49,12 @@ db.each('SELECT firstName, lastName, address FROM employees', (err, {firstName, 
 	console.log(`${firstName} ${lastName}, address: ${address}`);
 });
 
+db.each(`SELECT jobTitle, firstName, lastName
+				FROM employees
+				WHERE jobTitle = "Football Player"`, (err, {jobTitle, firstName, lastName}) => {
+					if (err) {
+						return console.log('err', err.toString());
+					}
+					console.log(`job title: ${jobTitle}, ${firstName} ${lastName}`)
+				})
+
