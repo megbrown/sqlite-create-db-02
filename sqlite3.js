@@ -17,11 +17,11 @@ createEmployeesTable();
 
 let list = [
   { id: 0, firstName: 'Fred', lastName: 'Smith', jobTitle: 'Cashier', address: '500 Somewhere Lane' },
-  { id: 1, firstName: 'Bob', lastName: 'Smith', jobTitle: 'Cashier', address: '501 Somewhere Road' },
-  { id: 2, firstName: 'Jane', lastName: 'Smith', jobTitle: 'Cashier', address: '503 Somewhere Avenue' },
-  { id: 3, firstName: 'Alice', lastName: 'Smith', jobTitle: 'Cashier', address: '505 Somewhere Path' },
-  { id: 4, firstName: 'Ben', lastName: 'Smith', jobTitle: 'Cashier', address: '507 Somewhere Pike' },
-  { id: 5, firstName: 'Nick', lastName: 'Smith', jobTitle: 'Cashier', address: '509 Somewhere Street' }
+  { id: 1, firstName: 'Bob', lastName: 'Smith', jobTitle: 'Dog Walker', address: '501 Somewhere Road' },
+  { id: 2, firstName: 'Jane', lastName: 'Smith', jobTitle: 'Lawyer', address: '503 Somewhere Avenue' },
+  { id: 3, firstName: 'Alice', lastName: 'Smith', jobTitle: 'Trainer', address: '505 Somewhere Path' },
+  { id: 4, firstName: 'Ben', lastName: 'Smith', jobTitle: 'Football Player', address: '507 Somewhere Pike' },
+  { id: 5, firstName: 'Nick', lastName: 'Smith', jobTitle: 'Musician', address: '509 Somewhere Street' }
 ]
 
 list.forEach( (employee) => {
@@ -34,10 +34,25 @@ list.forEach( (employee) => {
   )
 });
 
-db.each('SELECT * FROM employees', (err, allRows) => {
-  console.log('record', allRows);
+db.each('SELECT * FROM employees', (err, record) => {
+  console.log('record', record);
   if (err) {
     return console.log('err', err.toString());
  	}
+});
+
+db.each(`SELECT jobTitle
+				FROM employees`, (err, record) => {
+					console.log(record);
+				if (err) {
+					return console.log('err', err.toString());
+				}
+});
+
+db.each('SELECT firstName, lastName, address FROM employees', (err, {firstName, lastName, address}) => {
+	if (err) {
+		return console.log('err', err.toString());
+	}
+	console.log(`${firstName} ${lastName}, address: ${address}`);
 });
 
